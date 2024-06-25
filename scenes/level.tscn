@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://cc8s7bi6y5a57"]
+
+[ext_resource type="PackedScene" uid="uid://dbvapoddto6is" path="res://scenes/player.tscn" id="1_6vqmw"]
+[ext_resource type="Texture2D" uid="uid://dm2652cdu4cnm" path="res://assets/Backgrounds/darkPurple.png" id="1_p3tvm"]
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_w4qeo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqkag"]
+size = Vector2(14.5, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_opu0f"]
+size = Vector2(1280, 19)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_w4qeo")
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(637, 359.75)
+scale = Vector2(5.02344, 2.87695)
+texture = ExtResource("1_p3tvm")
+
+[node name="Player" parent="." instance=ExtResource("1_6vqmw")]
+position = Vector2(654, 474)
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(1287.75, 362)
+shape = SubResource("RectangleShape2D_fqkag")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2"]
+position = Vector2(-7, 360)
+shape = SubResource("RectangleShape2D_fqkag")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3"]
+position = Vector2(642, -9.5)
+shape = SubResource("RectangleShape2D_opu0f")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4"]
+position = Vector2(640, 730)
+shape = SubResource("RectangleShape2D_opu0f")
+
+[node name="MeteorTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Meteors" type="Node2D" parent="."]
+
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
